@@ -1,10 +1,13 @@
 import express from 'express';
 import pool from './config/db.js';
+import 'dotenv/config';
 
 // Import required modules
 
 // Create an Express app
 const app = express();
+
+const puerto = process.env.PORT || 3000;
 
 // Enable JSON parsing for request bodies
 app.use(express.json());
@@ -117,6 +120,6 @@ app.delete('/productos/:id', async (req, res) => {
 });
 
 // Start the server
-app.listen(3000, () => {
+app.listen(puerto, () => {
     console.log('Server started on port 3000');
 });
