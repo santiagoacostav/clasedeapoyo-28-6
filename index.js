@@ -9,6 +9,7 @@ const app = express();
 // Enable JSON parsing for request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 // Read all resources
 app.get('/productos', async (req, res) => {

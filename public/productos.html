@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #productos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        #productos div {
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Productos</h1>
+    <section id="productos">
+
+    </section>
+
+    <script>
+        fetch('/productos')
+            .then(response => response.json())
+            .then(data => {
+                const productos = data;
+                console.log(productos)
+                const productosContainer = document.querySelector('#productos');
+
+                productos.forEach(producto => {
+                    const productoElement = document.createElement('div');
+                    productoElement.innerHTML = `
+                        <h2>${producto.nombre}</h2>
+                        <p>${producto.descripcion}</p>
+                        <ul>
+                            <li>Id: ${producto.id_producto}</li>
+                            <li>Stock: ${producto.stock}</li>
+                            <li>Categoría: ${producto.categoria}</li>
+                            <li>Banco: ${producto.banco} - Descuento: ${producto.descuento}</li>
+                            <li>Cuotas: ${producto.cuotas}</li>
+                        </ul>
+                        <strong>$ ${producto.precio}</strong>
+                        
+                    `;
+                    productosContainer.appendChild(productoElement);
+                });
+            });
+    </script>
+</body>
+</html>
